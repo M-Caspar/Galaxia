@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
 project(Galaxia)
 
-set(CMAKE_CXX_FLAGS "-lsfml-graphics -lsfml-window -lsfml-system -O4 -std=c++14 -fopenmp" )
+set(CMAKE_CXX_FLAGS "-o sfml-app -lsfml-graphics -lsfml-window -lsfml-system -O4 -std=c++14 -fopenmp" )
 set(CMAKE_VERBOSE_MAKEFILE "ON")
 
 include_directories(include)

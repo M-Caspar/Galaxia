@@ -1,1 +1,0 @@
-/usr/bin/c++   -O4 -std=c++14   CMakeFiles/bin/Galaxia.dir/src/main.cpp.o  -o bin/Galaxia -rdynamic 

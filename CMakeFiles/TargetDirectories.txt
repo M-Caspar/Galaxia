@@ -1,3 +1,0 @@
-/home/maximilian/Galaxia/CMakeFiles/edit_cache.dir
-/home/maximilian/Galaxia/CMakeFiles/rebuild_cache.dir
-/home/maximilian/Galaxia/CMakeFiles/bin/Galaxia.dir
