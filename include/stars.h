@@ -15,15 +15,6 @@ public:
 		xacc = 0.0;
 		yacc = 0.0;
 	};
-	void move(double dt)
-	{
-		xpos += xvel*dt + 0.5*xacc*dt*dt;
-		ypos += yvel*dt + 0.5*yacc*dt*dt;
-		xvel += xacc*dt;
-		yvel += yacc*dt;
-		xacc = 0.;
-		yacc = 0.;
-	};
 	double xpos, ypos;
 	double xvel, yvel;
 	double xacc, yacc;
