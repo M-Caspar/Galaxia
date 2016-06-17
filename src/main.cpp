@@ -1,6 +1,6 @@
 #include "stars.h"
 #include <iostream>
-#include "gravity.cpp"
+#include "gravity.h"
 
 int main(int argc, char const *argv[])
 {
@@ -10,8 +10,9 @@ int main(int argc, char const *argv[])
 	for(double t = 0; t < 864000000; t+= 86400000)
 	{
 		i++;
-		std::cout << i << " " << t << " " << elements[2].xvel << "\n";
+		std::cout << i << " " << t << " " << elements[2].xpos << " " << elements[2].xfor<<"\n";
 		accelerate(elements, 86400000);
+
 	}
 	return 0;
 }

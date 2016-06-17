@@ -12,11 +12,11 @@ public:
 		ypos = sy;
 		xvel = vx;
 		yvel = vy;
-		xacc = 0.0;
-		yacc = 0.0;
+		xfor = 1.0;
+		yfor = 1.0;
 	};
 	double xpos, ypos;
 	double xvel, yvel;
-	double xacc, yacc;
+	double xfor, yfor;
 	double mass;
 };
