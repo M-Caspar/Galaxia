@@ -13,7 +13,16 @@
 using std::cout;
 using std::endl;
 
-unsigned int nop = 0;
+unsigned int nop = 0; //!< The global file counter.
+
+/**
+*@brief Reset the file counter.
+*/
+
+void reset_file_enum()
+{
+	nop = 0;
+}
 
 /**
 *@brief A simple way of keeping a program open, for example to keep a plot window from closing.
