@@ -15,6 +15,8 @@
 * This has only been tested on linux machines. While the program should likely also work under MacOS and Windows, please don't get mad at us if it doesn't.
 * First, open a terminal, <code>cd</code> to the Galaxia dir and use <code>cmake CMakeList.txt</code> to generate the makefile. Then use <code>make</code> to compile Galaxia.
 * <br> Additionaly, <code>doxygen Doxyfile</code> will provide excellent HTML and LaTeX documentation.
+* @section ack_sec Acknowledgements
+* 
 * @author Maximilian Caspar
 * @author Johannes Esser
 * @date 2016
@@ -35,7 +37,7 @@ int main(int argc, char const *argv[])
 
 		intro_art();
 	std::vector<Star> elements;
-	make_galaxy(elements, 4.73E20, 1100, 0,0,0,0);
+	make_galaxy(elements, 4.73E20, 1100, 0,0,0,0,10000);
 
 	std::vector<double> xrats;
 	std::vector<double> yrats;
