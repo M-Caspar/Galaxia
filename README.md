@@ -18,4 +18,4 @@ This tool was written during a programing seminar for physicist at the Universit
 
 Acknowledgements
 ================
-We use Jeremy Conlin's Gnuplot interface for c++. You can find it at https://code.google.com/archive/p/gnuplot-cpp/.
+We use Jeremy Conlin's Gnuplot interface for C++. You can find it at https://code.google.com/archive/p/gnuplot-cpp/.
