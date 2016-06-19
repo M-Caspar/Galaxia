@@ -16,6 +16,7 @@
 * First, open a terminal, <code>cd</code> to the Galaxia dir and use <code>cmake CMakeList.txt</code> to generate the makefile. Then use <code>make</code> to compile Galaxia.
 * <br> Additionaly, <code>doxygen Doxyfile</code> will provide excellent HTML and LaTeX documentation.
 * @section ack_sec Acknowledgements
+* We use Jeremy Conlin's Gnuplot interface for C++. You can find it at https://code.google.com/archive/p/gnuplot-cpp/.
 * 
 * @author Maximilian Caspar
 * @author Johannes Esser
@@ -35,31 +36,21 @@
 int main(int argc, char const *argv[])
 {
 
-		intro_art();
+	intro_art();
+
 	std::vector<Star> elements;
 	make_galaxy(elements, 4.73E20, 1100, 0,0,0,0,10000);
 
-	std::vector<double> xrats;
-	std::vector<double> yrats;
-	init_xy(xrats,yrats, elements.size());
-
-		Gnuplot g1("Galaxia");
-		g1.set_grid();
-		g1.set_xrange(-2*4.73E20,2*4.73E20);
-		g1.set_yrange(-2*4.73E20,2*4.73E20);
-	for(unsigned int i = 1; i<=1015;i++)
+	for(unsigned int i = 1; i<=2;i++)
 	{
 
-
-		export_xy(elements, xrats, yrats);
-		g1.reset_plot();
-		g1.set_style("points").plot_xy(xrats,yrats,"Galaxia");
+		std::cout << i << std::endl;
 		accelerate(elements, 8E15);
-		std::cout << i << "\t" << elements[1].xfor << std::endl;
+
 
 	}
 
-	g1.remove_tmpfiles();
+	export_plot(elements, 2*4.73E20);
 		wait_for_key();
 
 

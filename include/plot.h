@@ -1,6 +1,6 @@
 /** 
 *@file plot.h
-*@brief Most of the conversion and talking to the gnuplot interface happens in here.
+*@brief Most of the conversion and talking to the Gnuplot interface happens in here.
 */ 
 
 #pragma once
@@ -13,9 +13,14 @@
 using std::cout;
 using std::endl;
 
+unsigned int nop = 0;
+
 /**
 *@brief A simple way of keeping a program open, for example to keep a plot window from closing.
+*A simple, system independent way of delaying a program until the user inputs a key. Taken from the example program that comes with the Gnuplot interface.
+*@author Jeremy Conlin 
 */
+
 
 void wait_for_key ()
 {
@@ -35,7 +40,7 @@ void wait_for_key ()
 }
 
 /**
-*@brief Converts the vector of all stars into x,y values needed by the gnuplot interface.
+*@brief Converts the vector of all stars into x,y values needed by the Gnuplot interface.
 *@param cluster The list of all stars in the simulation, called by reference.
 *@param x Output list of all x values, called by reference.
 *@param y Output list of all y values, called by reference.
@@ -52,7 +57,7 @@ void export_xy(const std::vector<Star> & cluster, std::vector<double> & x, std::
 }
 
 /**
-*@brief Initializes the vectors used for calling gnuplot. Needed only once-
+*@brief Initializes the vectors used for calling Gnuplot. Needed only once.
 *@param x List of all x values, called by reference.
 *@param y List of all y values, called by reference.
 */
@@ -81,4 +86,38 @@ void intro_art()
 		 << "  \\____/_/  |_/_____/_/  |_/_/|_/___/_/  |_|" << endl << endl
 		 << "Writen by Maximilian Caspar and Johannes Esser" << endl 
 		 << "University of Wuppertal, 2016" << endl << endl;
+}
+
+/**
+*@brief A makro for exporting an image of the current stars. Assumes (0,0) to be the middle of the plot.
+*@param cluster The vector containing all stars.
+*@param scale Determines the scale of the plot.
+*
+*/
+
+void export_plot(const std::vector<Star> & cluster, const double scale)
+{
+	std::vector<double> x,y;
+	init_xy(x,y, cluster.size());
+	export_xy(cluster,x,y);
+        Gnuplot g1("lines");
+
+
+      
+        //
+        // Save to ps
+        //
+        cout << endl << endl << "*** save to ps " << endl;
+
+        cout << "y = sin(x) saved to test_output.ps in working directory" << endl;
+        g1.savetopng("test_output");
+        cout << 1 << endl;
+        g1.set_style("points").set_samples(300).set_xrange(- scale, scale).set_yrange(- scale, scale).plot_xy(x,y).showonscreen();
+        cout << 2 << endl;
+        g1.reset_all();
+        cout << 3 << endl;
+        wait_for_key();
+
+
+
 }

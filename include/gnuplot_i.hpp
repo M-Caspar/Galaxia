@@ -233,6 +233,8 @@ class Gnuplot
 
     /// saves a gnuplot session to a postscript file, filename without extension
     Gnuplot& savetops(const std::string &filename = "gnuplot_output");
+    /// saves a gnuplot session to a png file, filename without extension
+    Gnuplot& savetopng(const std::string &filename = "gnuplot_output");
 
 
     //----------------------------------------------------------------------------------
@@ -742,6 +744,7 @@ Gnuplot& Gnuplot::plot_xy(const X& x, const Y& y, const std::string &title)
 
     std::ofstream tmp;
     std::string name = create_tmpfile(tmp);
+    std::cout << name << std::endl;
     if (name == "")
         return *this;
 
@@ -1085,6 +1088,22 @@ Gnuplot& Gnuplot::savetops(const std::string &filename)
 
     return *this;
 }
+
+//------------------------------------------------------------------------------
+//
+// saves a gnuplot session to a png file
+//
+Gnuplot& Gnuplot::savetopng(const std::string &filename)
+{
+    cmd("set terminal postscript color");
+
+    std::ostringstream cmdstr;
+    cmdstr << "set output \"" << filename << ".png\"";
+    cmd(cmdstr.str());
+
+    return *this;
+}
+
 
 //------------------------------------------------------------------------------
 //
@@ -1886,7 +1905,7 @@ std::string Gnuplot::create_tmpfile(std::ofstream &tmp)
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__TOS_WIN__)
     char name[] = "gnuplotiXXXXXX"; //tmp file in working directory
 #elif defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__)
-    char name[] = "/tmp/gnuplotiXXXXXX"; // tmp file in /tmp
+    char name[] = "tmp/gnuplotiXXXXXX"; // tmp file in /tmp
 #endif
 
     //
@@ -1957,5 +1976,6 @@ void Gnuplot::remove_tmpfiles(){
 
         Gnuplot::tmpfile_num = 0;
     }
+    std::cout << "Removed Tempfiles" << std::endl;
 }
 #endif
