@@ -10,7 +10,7 @@ Additionaly, *doxygen Doxyfile* will provide excellent HTML and LaTeX documentat
 Prerequisites
 =============
 Your system has to have a working installation of gnuplot. If you don't have Gnuplot installed yet, go to http://www.gnuplot.info/ and get it, it's free.
-You will also need cmake and make in order to compile the code and Doxygen for compiling the documentation (optional).
+You will also need cmake and make in order to compile the code and Doxygen for compiling the documentation (optional). Additionally, ffmpeg is required for video output.
 
 Authors
 =======
