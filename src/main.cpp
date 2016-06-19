@@ -3,6 +3,18 @@
 *@brief The main program containing menus and basic structure. 
 */ 
 
+/** 
+* @mainpage Galaxia
+* 
+* A  
+* <br>Mit "<br>" kann bei der HTML-Dokumentation eine neue Zeile erzeugt werden 
+* 
+* Mit dem <img-Schlüsselwort können eigene Bilder hinzugefügt werden 
+* <img src="../application_screenshot.jpg" alt="Screenshot"> 
+* 
+* @author Maximilian Caspar
+* @author Johannes Esser
+*/ 
 
 #include "stars.h"
 #include "gravity.h"
