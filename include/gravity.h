@@ -19,7 +19,7 @@ const double LIGTHYEAR = 9.46073E15; //!< The lightyear is needed for calculatin
  * @BRIEF Return the Angle of a 2D-Vector given by (x,y)
  * 
  * The standart C++ function 'atan2()' returns an angle for two given coordinates, but 
- * we need the angle to be between \f$ 0 \f$ and \f$ 2\Pi \f$.
+ * we need the angle to be between \f$ 0 \f$ and \f$ 2 \Pi \f$.
  *
  */
 
