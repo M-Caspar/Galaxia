@@ -9,6 +9,9 @@
 #include "gnuplot_i.hpp"
 
 #include <iostream>
+#include <string>
+#include <ctime>
+
 
 using std::cout;
 using std::endl;
@@ -22,6 +25,17 @@ unsigned int nop = 0; //!< The global file counter.
 void reset_file_enum()
 {
 	nop = 0;
+}
+
+
+/**
+*@brief Calculate the number of digits of an unsigned int based on its log10.
+*@param i Input number
+*@return Number of digits
+*/
+unsigned int number_of_digits (unsigned int i)
+{
+    return i > 0 ? (int) log10 ((double) i) + 1 : 1;
 }
 
 /**
@@ -109,23 +123,34 @@ void export_plot(const std::vector<Star> & cluster, const double scale)
 	std::vector<double> x,y;
 	init_xy(x,y, cluster.size());
 	export_xy(cluster,x,y);
-        Gnuplot g1("lines");
+
+	nop++;
+
+	std::string name = "out/p";
+	for(unsigned int i = 1; i<= 5; i++)
+	{
+		if(i <= 5 - number_of_digits(nop))
+		{
+			name += "0";
+		}
+		else
+		{
+			break;
+		}
+	}
+	name += std::to_string(nop);
+	cout << "File saved: " << name << endl;
 
 
-      
-        //
-        // Save to ps
-        //
-        cout << endl << endl << "*** save to ps " << endl;
+    Gnuplot g1("points");
+    g1.savetopng(name.c_str());
+    g1.set_style("points").set_samples(300).set_xrange(- scale, scale).set_yrange(- scale, scale).plot_xy(x,y);
+    g1.reset_all();
 
-        cout << "y = sin(x) saved to test_output.ps in working directory" << endl;
-        g1.savetopng("test_output");
-        cout << 1 << endl;
-        g1.set_style("points").set_samples(300).set_xrange(- scale, scale).set_yrange(- scale, scale).plot_xy(x,y).showonscreen();
-        cout << 2 << endl;
-        g1.reset_all();
-        cout << 3 << endl;
-        wait_for_key();
+
+    sleep(1);
+
+    
 
 
 
