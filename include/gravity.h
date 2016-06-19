@@ -45,10 +45,23 @@ double get_angle(const double & x, const double & y)
 
 double orbit_velocity(const double & radius)
 {
-	long x = radius/( LIGTHYEAR*10000); //!< Normalize radius to 10000 lightyears.
+	double x = radius/( LIGTHYEAR*10000); //!< Normalize radius to 10000 lightyears.
 	return 1100*x/pow(1+x*x,0.75);
 
 }
+
+/**
+ * @BRIEF Return the orbit velocity of a star based on the distance to the galaxy center and the mass ratio for the galactic center.
+ * @param radius The distance from galaxy center in meters
+ * The orbital velocity can be approximated by assuming a homogeneous mass distribution. However, in discrete simulations it's more sensible 
+ * to work with the direct approach \f$ v_o = \sqrt{\frac{G \cdot M}{r}}\f$
+ */
+
+double orbit_velocity(const double & radius, const unsigned int & mco)
+{
+	return sqrt(G*MASS_OF_SUN*mco / radius);
+}
+
 
 /**
  * @BRIEF Initialize a galaxy distribution and write it in an array.
@@ -75,15 +88,21 @@ void make_galaxy(std::vector<Star> & Elements, const double & radius, const unsi
 
   	for (unsigned int i = 0; i < nos; i++)
   	{
-  		double x = distribution(generator);
-  		double y = distribution(generator);
+  		double x = 0;
+  		double y = 0;
+  		double rad = 0;
+  		while(rad < 0.05*radius)
+  		{
+  			x = distribution(generator);
+  			y = distribution(generator);
+  			rad = sqrt(x*x + y*y);
+  		}
   		double alpha = get_angle(x , y);
-  		double rad = sqrt(x*x + y*y);
-  		double v = orbit_velocity(rad);
+  		double v = orbit_velocity(rad, mco);
   		Star temp(x + sx ,y + sy,v*sin(alpha) + vx,-v*cos(alpha) + vy,MASS_OF_SUN);
   		Elements.push_back(temp);
 	}
-	Star center(sx, sy, vx, vy, MASS_OF_SUN*1000000);
+	Star center(sx, sy, vx, vy, MASS_OF_SUN*mco);
 	Elements.push_back(center);
 }
 
