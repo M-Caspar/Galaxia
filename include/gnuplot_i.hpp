@@ -26,6 +26,7 @@
 ///
 ////////////////////////////////////////////////////////////////////////////////
 
+#pragma once
 
 #ifndef _GNUPLOT_PIPES_H_
 #define _GNUPLOT_PIPES_H_
@@ -49,7 +50,7 @@
 #elif defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__) 
 //all UNIX-like OSs (Linux, *BSD, MacOSX, Solaris, ...)
  #include <unistd.h>            // for access(), mkstemp()
- #define GP_MAX_TMP_FILES  64
+ #define GP_MAX_TMP_FILES  64000
 #else
  #error unsupported or unknown operating system
 #endif
@@ -943,7 +944,7 @@ void stringtok (Container &container,
 //
 Gnuplot::~Gnuplot()
 {
-//  remove_tmpfiles();
+  remove_tmpfiles();
 
     // A stream opened by popen() should be closed by pclose()
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__TOS_WIN__)
@@ -1922,7 +1923,7 @@ std::string Gnuplot::create_tmpfile(std::ofstream &tmp)
 #endif
     {
         std::ostringstream except;
-        except << "Cannot create temporary file \"" << name << "\"";
+        except << "Cannot create temporary file (1)\"" << name << "\"";
         throw GnuplotException(except.str());
         return "";
     }
@@ -1931,7 +1932,7 @@ std::string Gnuplot::create_tmpfile(std::ofstream &tmp)
     if (tmp.bad())
     {
         std::ostringstream except;
-        except << "Cannot create temporary file \"" << name << "\"";
+        except << "Cannot create temporary file (2)\"" << name << "\"";
         throw GnuplotException(except.str());
         return "";
     }
@@ -1948,10 +1949,13 @@ std::string Gnuplot::create_tmpfile(std::ofstream &tmp)
 void Gnuplot::remove_tmpfiles(){
     if ((tmpfile_list).size() > 0)
     {
-        for (unsigned int i = 0; i < tmpfile_list.size(); i++)
-            remove( tmpfile_list[i].c_str() );
+        for (int i = 0; i < tmpfile_list.size(); ++i)
+        {
+            remove(tmpfile_list[i].c_str());
+        }
+        tmpfile_list.clear();
 
-        Gnuplot::tmpfile_num -= tmpfile_list.size();
+        Gnuplot::tmpfile_num = 0;
     }
 }
 #endif

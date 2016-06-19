@@ -1,3 +1,5 @@
+/** @file gravity.h*/ 
+
 #pragma once
 #include "stars.h"
 #include <cmath>
@@ -6,49 +8,83 @@
 #include <omp.h>
 #include <iostream>
 
-#define _G 6.674E-11;
-#define _MASS_OF_SUN 1.98892E30;
-#define _LIGTHYEAR 9.46073E15;
+const double G  = 6.674E-11; //!< The gravitational constant
+const double MASS_OF_SUN = 1.98892E30; //!< The mass of our sun serves as a template when creating galaxies.
+const double LIGTHYEAR = 9.46073E15; //!< The lightyear is needed for calculating orbital speed distribution.
 
+/**
+ * @BRIEF Return the Angle of a 2D-Vector given by (x,y)
+ * 
+ * The standart C++ function 'atan2()' returns an angle for two given coordinates, but 
+ * we need the angle to be between \f$ 0 \f$ and \f$ 2\Pi \f$.
+ *
+ */
+
+double get_angle(const double & x, const double & y)
+{
+	double at = atan2(y,x);
+	if(at >=0.)
+	{
+		return at;
+	}
+	else
+	{
+		return 6.28318530718 + at; 
+	}
+}
+
+/**
+ * @BRIEF Return the orbit velocity of a star based on the distance to the galaxy center.
+ * @param radius The distance from galaxy center in meters
+ * The orbital velocity can be approximated as a funtion dependend only on the distance to the
+ * galaxy center according to http://spacemath.gsfc.nasa.gov/Calculus/6Page106.pdf . 
+ */
 
 double orbit_velocity(const double & radius)
 {
-	long x = radius/( 9.46073E15*10000);
-	return 350000*x/pow(1+x*x,0.75);
+	long x = radius/( LIGTHYEAR*10000); //!< Normalize radius to 10000 lightyears.
+	return 1100*x/pow(1+x*x,0.75);
+
 }
 
+/**
+ * @BRIEF Initialize a galaxy distribution and write it in an array.
+ * @param Elements The vector of stars the galaxy is going to be written into, called by reference.
+ * @param radius The mean radius of the galaxy.
+ * @param nos The number of stars that is going to be generated.
+ * @param sx The x position of the galaxy.
+ * @param sy The y position of the galaxy.
+ * @param vx The x velocity of the galaxy.
+ * @param vy The y velocity of the galaxy.
+ * 
+ * The 
+ */
 
-void make_galaxy(std::vector<Star> & Elements, double radius, unsigned int nos, double sx, double sy, double vx, double vy)
+void make_galaxy(std::vector<Star> & Elements, const double & radius, const unsigned int & nos, const double & sx, const double & sy, const double & vx, const double & vy)
 {
 
 	Elements.reserve(Elements.size() + nos);
 	unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
 	std::default_random_engine generator (seed);
-  	std::normal_distribution<double> distribution(0.0, radius);
+  	std::normal_distribution<double> distribution(0.0, radius/2);
 
   	for (unsigned int i = 0; i < nos; i++)
   	{
   		double x = distribution(generator);
   		double y = distribution(generator);
-  		double alpha = atan2(y , x);
+  		double alpha = get_angle(x , y);
   		double rad = sqrt(x*x + y*y);
   		double v = orbit_velocity(rad);
-  		Star temp(x + sx ,y + sy,v*sin(alpha) + vx,v*cos(alpha) + vy,1.98892E30);
+  		Star temp(x + sx ,y + sy,v*sin(alpha) + vx,-v*cos(alpha) + vy,MASS_OF_SUN);
   		Elements.push_back(temp);
 	}
-	Star center(sx, sy, vx, vy, 1.98892E30*4310000);
+	Star center(sx, sy, vx, vy, MASS_OF_SUN*1000000);
 	Elements.push_back(center);
 }
 
 void accelerate(std::vector<Star> & cluster, double dt)
 {
 	unsigned int n = cluster.size();
-	#pragma omp parallel for
-	for(unsigned int i=0; i<n;i++)
-	{
-		cluster[i].xfor = 0;
-		cluster[i].yfor = 0;
-	}
 
 	#pragma omp parallel for
 	for(unsigned int i=0; i<n-1;i++)
@@ -59,21 +95,17 @@ void accelerate(std::vector<Star> & cluster, double dt)
 			double xvec = cluster[i].xpos - cluster[j].xpos;
 			double yvec = cluster[i].ypos - cluster[j].ypos;
 			double r = sqrt(xvec*xvec + yvec*yvec);
-			double con = 6.674E-11*cluster[i].mass*cluster[j].mass;
-			cluster[i].xfor += con*xvec*pow(r,-3);
-			cluster[i].yfor += con*yvec*pow(r,-3);
-			cluster[j].xfor -= con*xvec*pow(r,-3);
-			cluster[j].yfor -= con*yvec*pow(r,-3);
+			double con = G*cluster[i].mass*cluster[j].mass;
+			cluster[i].xfor -= con*xvec*pow(r,-3);
+			cluster[i].yfor -= con*yvec*pow(r,-3);
+			cluster[j].xfor += con*xvec*pow(r,-3);
+			cluster[j].yfor += con*yvec*pow(r,-3);
 		}
 	}
 	#pragma omp parallel for
 	for(unsigned int i = 0; i < n ;i++)
 	{
-
-
-		cluster[i].xpos = cluster[i].xpos + cluster[i].xvel*dt;
-		cluster[i].ypos = cluster[i].ypos + cluster[i].yvel*dt;
-		cluster[i].xvel = cluster[i].xvel + (cluster[i].xfor / cluster[i].mass)*dt;
-		cluster[i].yvel = cluster[i].yvel + (cluster[i].yfor / cluster[i].mass)*dt;
+		cluster[i].move(dt);
 	}
 }
+
