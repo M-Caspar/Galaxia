@@ -6,14 +6,19 @@
 /** 
 * @mainpage Galaxia
 * 
-* A  
-* <br>Mit "<br>" kann bei der HTML-Dokumentation eine neue Zeile erzeugt werden 
-* 
-* Mit dem <img-Schlüsselwort können eigene Bilder hinzugefügt werden 
-* <img src="../application_screenshot.jpg" alt="Screenshot"> 
-* 
+* We developed this program to calculate the movement of stars in galaxy collisions. 
+* <br>By changing the intial conditions it can be used to tackle about any N-Body problem in classical astrophysics.
+* @section pre_sec Prerequisites
+* Your system has to have a working installation of gnuplot. If you don't have gnuplot installed yet, go to http://www.gnuplot.info/ and get it, it's free.
+* <br> You will also need cmake and make in order to compile the code and Doxygen for compiling the documentation (optional).
+* @section inst_sec Installation
+* This has only been tested on linux machines. While the program should likely also work under MacOS and Windows, please don't get mad at us if it doesn't.
+* First, open a terminal, <code>cd</code> to the Galaxia dir and use <code>cmake CMakeList.txt</code> to generate the makefile. Then use <code>make</code> to compile Galaxia.
+* <br> Additionaly, <code>doxygen Doxyfile</code> will provide excellent HTML and LaTeX documentation.
 * @author Maximilian Caspar
 * @author Johannes Esser
+* @date 2016
+* @copyright GNU Public License.
 */ 
 
 #include "stars.h"
