@@ -744,7 +744,6 @@ Gnuplot& Gnuplot::plot_xy(const X& x, const Y& y, const std::string &title)
 
     std::ofstream tmp;
     std::string name = create_tmpfile(tmp);
-    std::cout << name << std::endl;
     if (name == "")
         return *this;
 
@@ -1091,11 +1090,11 @@ Gnuplot& Gnuplot::savetops(const std::string &filename)
 
 //------------------------------------------------------------------------------
 //
-// saves a gnuplot session to a png file
+// saves a gnuplot session to a postscript file
 //
 Gnuplot& Gnuplot::savetopng(const std::string &filename)
 {
-    cmd("set terminal postscript color");
+    cmd("set terminal png size 1024,768");
 
     std::ostringstream cmdstr;
     cmdstr << "set output \"" << filename << ".png\"";
@@ -1976,6 +1975,5 @@ void Gnuplot::remove_tmpfiles(){
 
         Gnuplot::tmpfile_num = 0;
     }
-    std::cout << "Removed Tempfiles" << std::endl;
 }
 #endif
