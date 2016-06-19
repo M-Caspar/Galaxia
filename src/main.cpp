@@ -1,4 +1,7 @@
-/** @file main.cpp*/ 
+/** 
+*@file main.cpp
+*@brief The main program containing menus and basic structure. 
+*/ 
 
 
 #include "stars.h"

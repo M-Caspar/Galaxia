@@ -1,4 +1,7 @@
-/** @file plot.h*/ 
+/** 
+*@file plot.h
+*@brief Most of the conversion and talking to the gnuplot interface happens in here.
+*/ 
 
 #pragma once
 

@@ -1,4 +1,7 @@
-/** @file gravity.h*/ 
+/** 
+*@file gravity.h
+*@brief Provides the functions needed for particles to be generated and interact.
+*/ 
 
 #pragma once
 #include "stars.h"

@@ -1,4 +1,7 @@
-/** @file stars.h*/ 
+/**
+*@file stars.h
+*@brief Definition of a simple Class representing a unit of mass in the simulation.
+*/ 
 
 
 #pragma once
