@@ -37,7 +37,7 @@ double get_angle(const double & x, const double & y)
  * @BRIEF Return the orbit velocity of a star based on the distance to the galaxy center.
  * @param radius The distance from galaxy center in meters
  * The orbital velocity can be approximated as a funtion dependend only on the distance to the
- * galaxy center according to http://spacemath.gsfc.nasa.gov/Calculus/6Page106.pdf . 
+ * galaxy center according to http://spacemath.gsfc.nasa.gov/Calculus/6Page106.pdf . The output had to be scaled for usable results.
  */
 
 double orbit_velocity(const double & radius)
@@ -56,11 +56,13 @@ double orbit_velocity(const double & radius)
  * @param sy The y position of the galaxy.
  * @param vx The x velocity of the galaxy.
  * @param vy The y velocity of the galaxy.
- * 
- * The 
+ * @param mco The mass ratio from star to galactic center.
+ *
+ * The galaxies are generated as random distributions of stars around a specific point in space.
+ * The orbital speed of the stars is set by an external function. A supermassive galactic center is set.
  */
 
-void make_galaxy(std::vector<Star> & Elements, const double & radius, const unsigned int & nos, const double & sx, const double & sy, const double & vx, const double & vy)
+void make_galaxy(std::vector<Star> & Elements, const double & radius, const unsigned int & nos, const double & sx, const double & sy, const double & vx, const double & vy, const unsigned int & mco)
 {
 
 	Elements.reserve(Elements.size() + nos);
@@ -81,6 +83,15 @@ void make_galaxy(std::vector<Star> & Elements, const double & radius, const unsi
 	Star center(sx, sy, vx, vy, MASS_OF_SUN*1000000);
 	Elements.push_back(center);
 }
+
+/**
+*@brief Calculates the forces between all stars and moves them for a given timestep.
+*@param cluster The vector containing all stars, called by reference
+*@param dt Time intervall used for calculating the movement.
+*
+* Calculation of force and movement are parallelised in order to spped up the calculation for large amounts of stars.
+* The movement of the star is calculated from within the Star class.
+*/
 
 void accelerate(std::vector<Star> & cluster, double dt)
 {
