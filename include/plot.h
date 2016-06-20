@@ -149,19 +149,7 @@ void export_plot(const std::vector<Star> & cluster, const double scale)
 
 	nop++;
 
-	std::string name = "out/p";
-	for(unsigned int i = 1; i<= 5; i++)
-	{
-		if(i <= 5 - number_of_digits(nop))
-		{
-			name += "0";
-		}
-		else
-		{
-			break;
-		}
-	}
-	name += std::to_string(nop);
+	std::string name = filename(nop);
 	cout << "File saved: " << name << endl;
 
 
