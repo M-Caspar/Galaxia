@@ -1,6 +1,7 @@
 /** 
 *@file plot.h
 *@brief Most of the conversion and talking to the Gnuplot interface happens in here.
+*@todo Add file IO
 */ 
 
 #pragma once
