@@ -1,7 +1,7 @@
 # Galaxia
 A simply galatic simulation tool
 
-Instalation
+Installation
 ===========
 This has only been tested on linux machines. While the program should likely also work under MacOS and Windows, please don't get mad at us if it doesn't. But you will have to change the method of video encoding and Gnuplot has to be globally available.
 First, open a terminal, *cd* to the Galaxia dir and use *cmake CMakeList.txt* to generate the makefile. Then use *make* to compile Galaxia.
