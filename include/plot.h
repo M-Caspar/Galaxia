@@ -57,8 +57,8 @@ void make_video()
 	{
 		std::string name = filename(i) + ".png";
 		remove(name.c_str());
-		nop = 0;
 	}
+	nop = 0;
 }
 
 /**
