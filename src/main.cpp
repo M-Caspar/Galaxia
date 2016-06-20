@@ -32,6 +32,7 @@
 #include <iostream>
 #include <vector>
 
+const double time_interval = 8E15; //!< The time interval is made available for user convenience.
 
 int main(int argc, char const *argv[])
 {
@@ -41,7 +42,7 @@ int main(int argc, char const *argv[])
 	std::vector<Star> elements;
 	make_galaxy(elements, 4.73E20, 1100, 0,0,0,0,10000);
 
-	for(unsigned int i = 1; i<=20;i++)
+	for(unsigned int i = 1; i<=200;i++)
 	{
 
 		std::cout << i << "\t";

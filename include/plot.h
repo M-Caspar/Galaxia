@@ -138,7 +138,7 @@ void intro_art()
 *@brief A makro for exporting an image of the current stars. Assumes (0,0) to be the middle of the plot.
 *@param cluster The vector containing all stars.
 *@param scale Determines the scale of the plot.
-*
+*@todo Make saving files more efficient, ditch the timer.
 */
 
 void export_plot(const std::vector<Star> & cluster, const double scale)
