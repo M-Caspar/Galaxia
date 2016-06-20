@@ -8,10 +8,11 @@
 #include "stars.h"
 #include "gnuplot_i.hpp"
 
+#include <stdio.h>
 #include <iostream>
 #include <string>
 #include <ctime>
-
+#include <assert.h>
 
 using std::cout;
 using std::endl;
@@ -19,23 +20,45 @@ using std::endl;
 unsigned int nop = 0; //!< The global file counter.
 
 /**
-*@brief Reset the file counter.
-*/
-
-void reset_file_enum()
-{
-	nop = 0;
-}
-
-
-/**
 *@brief Calculate the number of digits of an unsigned int based on its log10.
 *@param i Input number
 *@return Number of digits
 */
+
 unsigned int number_of_digits (unsigned int i)
 {
     return i > 0 ? (int) log10 ((double) i) + 1 : 1;
+}
+
+std::string filename(unsigned int n)
+{
+	std::string name = "out/p";
+
+	for(unsigned int i = 1; i<= 5; i++)
+	{
+		if(i <= 5 - number_of_digits(n))
+		{
+			name += "0";
+		}
+		else
+		{
+			break;
+		}
+	}
+	name += std::to_string(n);
+	return name;
+}
+
+
+void make_video()
+{
+	system("ffmpeg -hide_banner -loglevel panic -i out/p%05d.png out/movie.mp4 -vcodec mpeg4 -vb 128k -r 18");
+	for(unsigned int i=1; i<=nop;i++)
+	{
+		std::string name = filename(i) + ".png";
+		remove(name.c_str());
+		nop = 0;
+	}
 }
 
 /**
@@ -149,9 +172,5 @@ void export_plot(const std::vector<Star> & cluster, const double scale)
 
 
     sleep(1);
-
-    
-
-
-
 }
+

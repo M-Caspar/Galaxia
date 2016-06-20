@@ -41,7 +41,7 @@ int main(int argc, char const *argv[])
 	std::vector<Star> elements;
 	make_galaxy(elements, 4.73E20, 1100, 0,0,0,0,10000);
 
-	for(unsigned int i = 1; i<=200;i++)
+	for(unsigned int i = 1; i<=20;i++)
 	{
 
 		std::cout << i << "\t";
@@ -50,7 +50,7 @@ int main(int argc, char const *argv[])
 
 
 	}
-
+	make_video();
 
 
 
