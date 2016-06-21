@@ -51,7 +51,7 @@ int main(int argc, char const *argv[])
 
 
 	}
-	make_video();
+	make_video(true);
 
 
 

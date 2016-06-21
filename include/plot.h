@@ -50,16 +50,49 @@ std::string filename(unsigned int n)
 	return name;
 }
 
+/**
+*@brief Turn all of the plot files in /out into a video file.
+*@param delete_plotfiles Specify wether to delete the plots or to keep them
+* This function removes temporary files and calls ffmpeg to turn all available plot files into an .mp4 file.
+* By passing delete_plotfiles to TRUE all .png files are removed in the process.
+*/
 
-void make_video()
+void make_video(bool delete_plotfiles)
 {
-	system("ffmpeg -hide_banner -loglevel panic -i out/p%05d.png out/movie.mp4 -vcodec mpeg4 -vb 128k -r 18");
-	for(unsigned int i=1; i<=nop;i++)
+	try
 	{
-		std::string name = filename(i) + ".png";
-		remove(name.c_str());
+		cout << endl;
+		Gnuplot g1;
+		sleep(3);
+		g1.remove_tmpfiles();
+		cout << "Deleted temporary files" << endl;
+		if (system("ffmpeg -hide_banner -loglevel panic -i out/p%05d.png out/movie.mp4 -vcodec mpeg4 -vb 128k -r 18") == 0)
+		{
+			cout << "Successfully created video, you can find it at out/movie.mp4" << endl;
+			if(delete_plotfiles)
+			{
+				for(unsigned int i=1; i<=nop;i++)
+				{
+					std::string name = filename(i) + ".png";
+					if(remove(name.c_str()) != 0)
+					{
+						throw ("Unspecified file deletion error");
+					}
+				}
+				cout << "Deleted plot files" << endl;
+				nop = 0;
+			}
+		}
+		else
+		{
+			throw ("Failed to create output video output");
+		}
 	}
-	nop = 0;
+	catch(std::string er)
+	{
+		cout << er << endl;
+	}
+
 }
 
 /**
@@ -158,11 +191,6 @@ void export_plot(const std::vector<Star> & cluster, const double scale)
     g1.savetopng(name.c_str());
     g1.set_style("points").set_samples(300).set_xrange(- scale, scale).set_yrange(- scale, scale).plot_xy(x,y);
     g1.reset_all();
-    if(nop%100 == 0)
-    {
-    	sleep(2);
-    	g1.remove_tmpfiles();
-    }
     
 }
 
