@@ -64,7 +64,7 @@ class GnuplotException : public std::runtime_error
         GnuplotException(const std::string &msg) : std::runtime_error(msg){}
 };
 
-
+        std::vector<std::string> tmpfile_list; 
 
 class Gnuplot
 {
@@ -84,8 +84,8 @@ class Gnuplot
         std::string              pstyle;  
   	///\brief interpolate and approximate data in defined styles (e.g. spline)
         std::string              smooth;    
-  	///\brief list of created tmpfiles   
-        std::vector<std::string> tmpfile_list; 
+  	//\brief list of created tmpfiles   
+       // std::vector<std::string> tmpfile_list; 
 
     //----------------------------------------------------------------------------------
     // static data
@@ -946,7 +946,7 @@ void stringtok (Container &container,
 //
 Gnuplot::~Gnuplot()
 {
-  remove_tmpfiles();
+  //remove_tmpfiles();
 
     // A stream opened by popen() should be closed by pclose()
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__TOS_WIN__)

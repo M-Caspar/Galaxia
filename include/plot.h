@@ -158,8 +158,11 @@ void export_plot(const std::vector<Star> & cluster, const double scale)
     g1.savetopng(name.c_str());
     g1.set_style("points").set_samples(300).set_xrange(- scale, scale).set_yrange(- scale, scale).plot_xy(x,y);
     g1.reset_all();
-
-
-    sleep(1);
+    if(nop%100 == 0)
+    {
+    	sleep(2);
+    	g1.remove_tmpfiles();
+    }
+    
 }
 
