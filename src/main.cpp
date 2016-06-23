@@ -28,6 +28,7 @@
 #include "gravity.h"
 #include "plot.h"
 #include "gnuplot_i.hpp"
+#include "fileio.h"
 
 #include <iostream>
 #include <vector>
@@ -38,10 +39,10 @@ int main(int argc, char const *argv[])
 {
 
 	intro_art();
-
+	
 	std::vector<Star> elements;
 	make_galaxy(elements, 4.73E20, 1100, 0,0,0,0,10000);
-
+	/*
 	for(unsigned int i = 1; i<=200;i++)
 	{
 
@@ -52,9 +53,9 @@ int main(int argc, char const *argv[])
 
 	}
 	make_video(true);
-
-
-
+	*/
+	gFile g("out");
+	g.write_stars(elements);
 
 	return 0;
 }
