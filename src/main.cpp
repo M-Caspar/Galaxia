@@ -33,7 +33,7 @@
 #include <iostream>
 #include <vector>
 
-const double time_interval = 8E15; //!< The time interval is made available for user convenience.
+const double time_interval = 6E14; //!< The time interval is made available for user convenience.
 
 int main(int argc, char const *argv[])
 {
@@ -41,21 +41,26 @@ int main(int argc, char const *argv[])
 	intro_art();
 	
 	std::vector<Star> elements;
-	make_galaxy(elements, 4.73E20, 1100, 0,0,0,0,10000);
+	make_galaxy(elements, 4.73E20, 1000, -1E21,-1E21,1E4,1E4,4100000);
+	make_galaxy(elements, 6.696E20,1000,1E21,1E21,-1E4, -1E4,4500000);
+	std::cout << elements.size() << std::endl;
+	gFile g("Collision1");
+	g.save(elements);
 	
-	for(unsigned int i = 1; i<=200;i++)
+	for(unsigned int i = 1; i<=2000;i++)
 	{
 
-		std::cout << i << "\t";
-		accelerate(elements, 8E15);
-		export_plot(elements, 2*4.73E20);
+		std::cout << i << "\n";
+		usleep(2);
+		accelerate(elements, time_interval);
+		export_plot(elements, 1.5E21);
 
 
 	}
 	make_video(true); 
 	
-	gFile g("out");
-	g.save(elements);
+	gFile f("Collision2");
+	f.save(elements);
 
 	return 0;
 }

@@ -81,7 +81,7 @@ double orbit_velocity(const double & radius, const unsigned int & mco)
 void make_galaxy(std::vector<Star> & Elements, const double & radius, const unsigned int & nos, const double & sx, const double & sy, const double & vx, const double & vy, const unsigned int & mco)
 {
 
-	Elements.reserve(Elements.size() + nos);
+	//Elements.reserve(Elements.size() + nos);
 	unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
 	std::default_random_engine generator (seed);
   	std::normal_distribution<double> distribution(0.0, radius/2);
