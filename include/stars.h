@@ -7,7 +7,10 @@
 #pragma once
 
 #include <vector>
-
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
+#include <boost/serialization/vector.hpp>
+using namespace boost::archive;
 /**
 *@class Star
 *
@@ -38,6 +41,8 @@ public:
 		xfor = 0.0;
 		yfor = 0.0;
 	};
+	Star()
+	{};
 	/**
 	*@brief Moves the star according to its speed, accelerates the star according to its force and resets the force to 0. 
 	*@param dt This sets the time interval in which the movement takes place.
@@ -58,4 +63,21 @@ public:
 	double xfor, //!< Current x force
 		   yfor; //!< Current y force
 	double mass; //!< Mass of star
+    friend class boost::serialization::access;
+
+    /*
+    *
+    *
+    *
+    */
+
+    template<class Archive>
+    void serialize(Archive & ar, const unsigned int version)
+    {
+		ar & xpos;
+		ar & ypos;
+		ar & xvel;
+		ar & yvel;
+		ar & mass;
+    }
 };

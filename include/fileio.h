@@ -1,42 +1,74 @@
+/**
+*@file fileio.h
+*@brief Definition of a simple Class representing a unit of mass in the simulation.
+*/ 
+
+#pragma once
+
 #include "stars.h"
 
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <vector>
-
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/text_iarchive.hpp>
+#include <boost/serialization/vector.hpp>
 using namespace std;
-
+using namespace boost::archive;
 
 
 class gFile
 {
 public:
-	gFile(std::string in_name)
+	gFile(string in_name)
 	{
 		name = "out/" + in_name + ".galaxia";
+		try
+		{
+			if(exists_test(name))
+			{
+				string inp;
+				cout << "File " << name << " already exists, overwrite[y/n]: ";
+				cin >> inp;
+				if(inp.at(0) == 'n' || inp.at(0) == 'N')
+				{
+					throw "File output error\n";
+				}
+			}
+			
+
+		}
+		catch(string err)
+		{
+			cout << err;
+		}
 	}
 
-	void write_star(Star out_star)
+	vector<Star> load()
 	{
-		ofstream myfile;
-		myfile.open(name);
-		myfile << out_star.mass << ";" << out_star.xpos << ";" << out_star.ypos << ";"
-		<< out_star.xvel << ";" << out_star.yvel << "\n";
-		myfile.close();
+		ifstream file{name};
+ 		text_iarchive ia{file};
+ 		vector<Star> stars;
+ 		ia >> stars;
+ 		return stars;
 	}
-	void write_stars(std::vector<Star> out_stars)
+	void save(vector<Star>& out_stars)
 	{
-		ofstream myfile;
-		myfile.open(name);
-		for(unsigned int i=0; i < out_stars.size(); i++)
-		{
-			myfile << out_stars[i].mass << ";" << out_stars[i].xpos << ";" << out_stars[i].ypos << ";"
-			<< out_stars[i].xvel << ";" << out_stars[i].yvel << "\n";		
-		}
-		myfile.close();
-	}	
+  		std::ofstream file{name};
+  		text_oarchive oa{file};
+  	
+  			oa << out_stars;
+  		
+	}
 private:
 
-	std::string name;
+	string name;
+
+	inline bool exists_test (const std::string& name)
+	{
+    	ifstream f(name.c_str());
+    	return f.good();
+	}
+
 };

@@ -42,20 +42,20 @@ int main(int argc, char const *argv[])
 	
 	std::vector<Star> elements;
 	make_galaxy(elements, 4.73E20, 1100, 0,0,0,0,10000);
-	/*
+	
 	for(unsigned int i = 1; i<=200;i++)
 	{
 
 		std::cout << i << "\t";
 		accelerate(elements, 8E15);
-			export_plot(elements, 2*4.73E20);
+		export_plot(elements, 2*4.73E20);
 
 
 	}
-	make_video(true);
-	*/
+	make_video(true); 
+	
 	gFile g("out");
-	g.write_stars(elements);
+	g.save(elements);
 
 	return 0;
 }
