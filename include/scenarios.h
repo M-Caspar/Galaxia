@@ -13,7 +13,7 @@
 void scenario_andromeda(bool video)
 {
 	std::vector<Star> elements;
-	gFile g("examples/scenarios/Collision1.galaxia");
+	gFile g("examples/scenarios/Collision1.galaxia", false);
 	elements = g.load();
 	const double time_interval = 6E15; //!< The time interval is made available for user convenience.
 

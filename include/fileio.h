@@ -31,12 +31,12 @@ public:
 	*@brief Sets the file name and determines swether to overwrite already existing files.
 	*@param in_name The file name (without file type or location)
 	*/
-	gFile(string in_name)
+	gFile(string in_name, bool write_file)
 	{
 		name =  in_name;
 		try
 		{
-			if(exists_test(name))
+			if(exists_test(name) && write_file)
 			{
 				string inp;
 				cout << "File " << name << " already exists, overwrite[y/n]: ";
