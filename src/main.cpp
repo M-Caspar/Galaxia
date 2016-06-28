@@ -26,43 +26,14 @@
 * @copyright GNU Public License.
 */
 
-#include "stars.h"
-#include "gravity.h"
+#include "scenarios.h"
 #include "plot.h"
-#include "gnuplot_i.hpp"
-#include "fileio.h"
-
-#include <iostream>
-#include <vector>
-
-const double time_interval = 6E15; //!< The time interval is made available for user convenience.
 
 int main(int argc, char const *argv[])
 {
 
 	intro_art();
-	
-	std::vector<Star> elements;
-	make_galaxy(elements, 4.73E20, 1000, -1E21,-1E21,1E3,1E3,4100000);
-	make_galaxy(elements, 6.696E20,1000,5E20,8E20,-1E3, -1E3,4500000);
-	std::cout << elements.size() << std::endl;
-	gFile g("Collision1");
-	g.save(elements);
-	
-	for(unsigned int i = 1; i<=2000;i++)
-	{
-
-		std::cout << i << "\n";
-		usleep(2);
-		accelerate(elements, time_interval);
-		export_plot(elements, 1.5E21);
-
-
-	}
-	make_video(true); 
-	
-	gFile f("Collision2");
-	f.save(elements);
+	scenario_andromeda(true);
 
 	return 0;
 }

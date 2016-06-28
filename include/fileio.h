@@ -33,7 +33,7 @@ public:
 	*/
 	gFile(string in_name)
 	{
-		name = "out/" + in_name + ".galaxia";
+		name =  in_name;
 		try
 		{
 			if(exists_test(name))
