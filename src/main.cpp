@@ -5,7 +5,8 @@
 
 /** 
 * @mainpage Galaxia
-* 
+* @image html screenshot.png
+* @image latex screenshot.png "Simulating a galaxy with Galaxia" width=5cm
 * We developed this program to calculate the movement of stars in galaxy collisions. 
 * <br>By changing the intial conditions it can be used to tackle about any N-Body problem in classical astrophysics.
 * @section pre_sec Prerequisites
@@ -21,8 +22,9 @@
 * @author Maximilian Caspar
 * @author Johannes Esser
 * @date 2016
+* 
 * @copyright GNU Public License.
-*/ 
+*/
 
 #include "stars.h"
 #include "gravity.h"
@@ -33,7 +35,7 @@
 #include <iostream>
 #include <vector>
 
-const double time_interval = 6E14; //!< The time interval is made available for user convenience.
+const double time_interval = 6E15; //!< The time interval is made available for user convenience.
 
 int main(int argc, char const *argv[])
 {
@@ -41,8 +43,8 @@ int main(int argc, char const *argv[])
 	intro_art();
 	
 	std::vector<Star> elements;
-	make_galaxy(elements, 4.73E20, 1000, -1E21,-1E21,1E4,1E4,4100000);
-	make_galaxy(elements, 6.696E20,1000,1E21,1E21,-1E4, -1E4,4500000);
+	make_galaxy(elements, 4.73E20, 1000, -1E21,-1E21,1E3,1E3,4100000);
+	make_galaxy(elements, 6.696E20,1000,5E20,8E20,-1E3, -1E3,4500000);
 	std::cout << elements.size() << std::endl;
 	gFile g("Collision1");
 	g.save(elements);

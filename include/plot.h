@@ -184,13 +184,18 @@ void export_plot(const std::vector<Star> & cluster, const double scale)
 	nop++;
 
 	std::string name = filename(nop);
-	cout << "File saved: " << name << endl;
+	cout << "File saved: " << name.c_str() << endl;
 
 
     Gnuplot g1("points");
     g1.savetopng(name.c_str());
     g1.set_style("points").set_samples(300).set_xrange(- scale, scale).set_yrange(- scale, scale).plot_xy(x,y);
     g1.reset_all();
-    
+    if(nop%1000 == 0)
+    {
+    	sleep(5);
+    	g1.remove_tmpfiles();
+    	g1.cmd("exit");
+    }
 }
 
