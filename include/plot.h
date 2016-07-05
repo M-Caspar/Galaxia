@@ -155,20 +155,6 @@ void init_xy(std::vector<double> & x, std::vector<double> & y, unsigned int n)
 }
 
 /**
-*@brief Print the program name to the console
-*/
-void intro_art()
-{
-	cout << "     _________    __    ___   _  __ ________" << endl
-		 << "    / ____/   |  / /   /   | | |/ //  _/   |" << endl
-		 << "   / / __/ /| | / /   / /| | |   / / // /| |" << endl
-		 << "  / /_/ / ___ |/ /___/ ___ |/   |_/ // ___ |" << endl
-		 << "  \\____/_/  |_/_____/_/  |_/_/|_/___/_/  |_|" << endl << endl
-		 << "Writen by Maximilian Caspar and Johannes Esser" << endl 
-		 << "University of Wuppertal, 2016" << endl << endl;
-}
-
-/**
 *@brief A makro for exporting an image of the current stars. Assumes (0,0) to be the middle of the plot.
 *@param cluster The vector containing all stars.
 *@param scale Determines the scale of the plot.

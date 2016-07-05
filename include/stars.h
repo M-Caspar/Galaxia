@@ -41,6 +41,9 @@ public:
 		xfor = 0.0;
 		yfor = 0.0;
 	};
+	/**
+	*@brief Defaul constructor for Star, does absolutely nothing and is only here for boost.
+	*/
 	Star()
 	{};
 	/**
@@ -66,9 +69,7 @@ public:
     friend class boost::serialization::access;
 
     /*
-    *
-    *
-    *
+    *@brief Required for class serialisation, only used by boost.
     */
 
     template<class Archive>
