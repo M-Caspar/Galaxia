@@ -29,7 +29,7 @@ public:
 	/**
 	*The constructor for gFile.
 	*@brief Sets the file name and determines swether to overwrite already existing files.
-	*@param in_name The file name (without file type or location)
+	*@param in_name The file name (relative to main path)
 	*/
 	gFile(string in_name, bool write_file)
 	{
@@ -83,10 +83,11 @@ private:
 
 	/**
 	*@brief Checks whether or not a file already exists.
+	*@param in_name Name of the file, relative to main path.
 	*/
-	inline bool exists_test (const std::string& name)
+	inline bool exists_test (const std::string& in_name)
 	{
-    	ifstream f(name.c_str());
+    	ifstream f(in_name.c_str());
     	return f.good();
 	}
 

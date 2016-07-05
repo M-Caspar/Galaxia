@@ -27,7 +27,20 @@
 */
 
 #include "scenarios.h"
-#include "plot.h"
+
+/**
+*@brief Print the program name to the console
+*/
+void intro_art()
+{
+	cout << "     _________    __    ___   _  __ ________" << endl
+		 << "    / ____/   |  / /   /   | | |/ //  _/   |" << endl
+		 << "   / / __/ /| | / /   / /| | |   / / // /| |" << endl
+		 << "  / /_/ / ___ |/ /___/ ___ |/   |_/ // ___ |" << endl
+		 << "  \\____/_/  |_/_____/_/  |_/_/|_/___/_/  |_|" << endl << endl
+		 << "Writen by Maximilian Caspar and Johannes Esser" << endl 
+		 << "University of Wuppertal, 2016" << endl << endl;
+}
 
 int main(int argc, char const *argv[])
 {

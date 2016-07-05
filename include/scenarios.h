@@ -10,6 +10,11 @@
 #include "gravity.h"
 #include "fileio.h"
 
+/*
+*@brief A simple collision that will occur in a few billion years. The collision as depicted in Galaxia is probalbly not massive enough because it lacks stars, but it looks rather nice.
+*@param video Decide wether to convert the output plots into a video
+*/
+
 void scenario_andromeda(bool video)
 {
 	std::vector<Star> elements;
@@ -28,4 +33,9 @@ void scenario_andromeda(bool video)
 
 	}
 	if(video){make_video(true);}; 
+}
+
+void scenario_milkyway(bool video)
+{
+
 }
