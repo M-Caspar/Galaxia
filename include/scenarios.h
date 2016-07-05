@@ -37,5 +37,20 @@ void scenario_andromeda(bool video)
 
 void scenario_milkyway(bool video)
 {
+	std::vector<Star> elements;
+	gFile g("examples/scenarios/Milkyway.galaxia", false);
+	elements = g.load();
+	const double time_interval = 6E15; //!< The time interval is made available for user convenience.
 
+	for(unsigned int i = 1; i<=1000;i++)
+	{
+
+		std::cout << i << "\n";
+		usleep(2);
+		accelerate(elements, time_interval);
+		export_plot(elements, 1.5E21);
+
+
+	}
+	if(video){make_video(true);}; 
 }
