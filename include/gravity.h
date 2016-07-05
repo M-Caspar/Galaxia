@@ -107,50 +107,6 @@ void make_galaxy(std::vector<Star> & Elements, const double & radius, const unsi
 }
 
 /**
- * @BRIEF Initialize a galaxy distribution and write it in an array. Correct masses for number of stars relative to our own galaxy.
- * @param Elements The vector of stars the galaxy is going to be written into, called by reference.
- * @param radius The mean radius of the galaxy.
- * @param nos The number of stars that is going to be generated.
- * @param sx The x position of the galaxy.
- * @param sy The y position of the galaxy.
- * @param vx The x velocity of the galaxy.
- * @param vy The y velocity of the galaxy.
- * @param mco The mass ratio from star to galactic center.
- *
- * The galaxies are generated as random distributions of stars around a specific point in space.
- * The orbital speed of the stars is set by an external function. A supermassive galactic center is set.
- */
-
-void make_galaxy_corrected(std::vector<Star> & Elements, const double & radius, const unsigned int & nos, const double & sx, const double & sy, const double & vx, const double & vy, const unsigned int & mco)
-{
-
-	//Elements.reserve(Elements.size() + nos);
-	unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-	std::default_random_engine generator (seed);
-  	std::normal_distribution<double> distribution(0.0, radius/2);
-
-  	for (unsigned int i = 0; i < nos; i++)
-  	{
-  		double x = 0;
-  		double y = 0;
-  		double rad = 0;
-  		while(rad < 0.05*radius)
-  		{
-  			x = distribution(generator);
-  			y = distribution(generator);
-  			rad = sqrt(x*x + y*y);
-  		}
-  		double alpha = get_angle(x , y);
-  		double v = orbit_velocity(rad, mco);
-  		Star temp(x + sx ,y + sy,v*sin(alpha) + vx,-v*cos(alpha) + vy, (3E12*MASS_OF_SUN  - MASS_OF_SUN*mco) / nos);
-  		Elements.push_back(temp);
-	}
-	Star center(sx, sy, vx, vy, MASS_OF_SUN*mco);
-	Elements.push_back(center);
-}
-
-
-/**
 *@brief Calculates the forces between all stars and moves them for a given timestep.
 *@param cluster The vector containing all stars, called by reference
 *@param dt Time intervall used for calculating the movement.

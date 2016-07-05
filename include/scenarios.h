@@ -20,8 +20,7 @@ void scenario_andromeda(bool video)
 	std::vector<Star> elements;
 	gFile g("examples/scenarios/Collision1.galaxia", false);
 	elements = g.load();
-	const double time_interval = 6E15; //!< The time interval is made available for user convenience.
-
+	const double time_interval = 6E15; 
 	for(unsigned int i = 1; i<=1000;i++)
 	{
 
@@ -40,15 +39,14 @@ void scenario_milkyway(bool video)
 	std::vector<Star> elements;
 	gFile g("examples/scenarios/Milkyway.galaxia", false);
 	elements = g.load();
-	const double time_interval = 6E15; //!< The time interval is made available for user convenience.
-
+	const double time_interval = 6E13; 
 	for(unsigned int i = 1; i<=1000;i++)
 	{
 
 		std::cout << i << "\n";
 		usleep(2);
 		accelerate(elements, time_interval);
-		export_plot(elements, 1.5E21);
+		export_plot(elements, 7.5E20);
 
 
 	}
