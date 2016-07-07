@@ -28,6 +28,10 @@
 
 #include "scenarios.h"
 
+using std::cout;
+using std::endl;
+using std::cin;
+
 /**
 *@brief Print the program name to the console
 */
@@ -42,11 +46,74 @@ void intro_art()
 		 << "University of Wuppertal, 2016" << endl << endl;
 }
 
+/**
+*@brief Print a user menu.
+*/
+
+void make_menu()
+{
+	cout << "Hello and welcome to Galaxia. Here are your options:" << endl << endl;
+	cout << "  a The Milkyway: Watch our home galaxy in all it\'s beauty." << endl << endl;
+	cout << "  b Andromeda: See our neighbour galaxy smash into us." << endl << endl;
+	//cout << "  c Uniform distribution: Why do stars from from uniform distributions of mass?" << endl << endl;
+	cout << "  x Exit Galaxia" << endl;
+}
+
+/**
+*@brief Initialize components and handle user choices.
+*@param argc The number of arguments.
+*@param argv Arguments passed to the program, currently unused.
+*/
+
 int main(int argc, char const *argv[])
 {
 
 	intro_art();
-	scenario_andromeda(true);
+	make_menu();
+	cout << "Please input your choice: ";
+	char choice;
+
+	do
+	{
+		cin >> choice;
+		switch(choice)
+		{
+			case 'a':
+			cout << "Do you want to create a video (this will delete plot files)? (y/n) ";
+			cin >> choice;
+			if(choice = 'j')
+			{
+				scenario_milkyway(true);
+				}
+			else
+			{
+				scenario_milkyway(false);
+			}
+			break;
+
+			case 'b':
+			cout << "Do you want to create a video (this will delete plot files)? (y/n) ";
+			cin >> choice;
+			if(choice = 'j')
+			{
+				scenario_andromeda(true);
+			}
+			else
+			{
+				scenario_andromeda(false);
+			}
+			break;
+
+			case 'x':
+			cout << "Live long and prosper!" << endl;
+			break;
+
+			default :
+			choice = 'u';
+			cout << "You picked an invalid option, please choose again: ";
+			break;
+		}
+	} while(choice == 'u');
 
 	return 0;
 }

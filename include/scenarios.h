@@ -20,7 +20,7 @@ void scenario_andromeda(bool video)
 	std::vector<Star> elements;
 	gFile g("examples/scenarios/Collision1.galaxia", false);
 	elements = g.load();
-	const double time_interval = 6E15; 
+	const double time_interval = 1E15; 
 	for(unsigned int i = 1; i<=1000;i++)
 	{
 
@@ -33,6 +33,12 @@ void scenario_andromeda(bool video)
 	}
 	if(video){make_video(true);}; 
 }
+
+/**
+*@brief A rather nice overview over our home galaxy.
+*@param video Decide wether to convert the output plots into a video
+*/
+
 
 void scenario_milkyway(bool video)
 {
