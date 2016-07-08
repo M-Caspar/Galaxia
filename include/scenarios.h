@@ -24,7 +24,7 @@ void scenario_andromeda(bool video)
 	for(unsigned int i = 1; i<=1000;i++)
 	{
 
-		std::cout << "Simulation step "  << i << "  ";
+		std::cout << "Simulation step "  << i << "\t";
 		usleep(2);
 		accelerate(elements, time_interval);
 		export_plot(elements, 1.5E21);
@@ -48,7 +48,7 @@ void scenario_milkyway(bool video)
 	for(unsigned int i = 1; i<=1000;i++)
 	{
 
-		std::cout << "Simulation step " << i << "  ";
+		std::cout << "Simulation step " << i << "\t";
 		usleep(2);
 		accelerate(elements, time_interval);
 		export_plot(elements, 7.5E20);
@@ -72,7 +72,7 @@ void scenario_square(bool video)
 	for(unsigned int i = 1; i<=1000;i++)
 	{
 
-		std::cout << "Simulation step " << i << "  ";
+		std::cout << "Simulation step " << i << "\t";
 		usleep(2);
 		accelerate(elements, time_interval);
 		export_plot(elements, 9.5E20);

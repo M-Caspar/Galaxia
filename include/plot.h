@@ -170,7 +170,7 @@ void export_plot(const std::vector<Star> & cluster, const double scale)
 	nop++;
 
 	std::string name = filename(nop);
-	cout << "File saved: " << name.c_str() << endl;
+	cout << "File saved: " << name.c_str() << "  ";
 
 
     Gnuplot g1("points");

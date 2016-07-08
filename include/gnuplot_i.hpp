@@ -1094,7 +1094,7 @@ Gnuplot& Gnuplot::savetops(const std::string &filename)
 //
 Gnuplot& Gnuplot::savetopng(const std::string &filename)
 {
-    cmd("set terminal png size 1024,768");
+    cmd("set term png medium size 1024,768");
 
     std::ostringstream cmdstr;
     cmdstr << "set output \"" << filename << ".png\"";
