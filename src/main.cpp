@@ -28,6 +28,8 @@
 
 #include "scenarios.h"
 
+#include <iomanip>
+
 using std::cout;
 using std::endl;
 using std::cin;
@@ -67,7 +69,7 @@ void make_menu()
 
 int main(int argc, char const *argv[])
 {
-
+	std::cout << std::fixed << std::setprecision (3);
 	intro_art();
 	make_menu();
 	cout << "Please input your choice: ";

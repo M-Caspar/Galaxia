@@ -17,18 +17,20 @@
 
 void scenario_andromeda(bool video)
 {
+	std::cout << std::endl;
 	std::vector<Star> elements;
 	gFile g("examples/scenarios/Collision1.galaxia", false);
 	elements = g.load();
 	const double time_interval = 1E15; 
 	for(unsigned int i = 1; i<=1000;i++)
 	{
-
+		double ctime1 = omp_get_wtime();
 		std::cout << "Simulation step "  << i << "\t";
-		usleep(2);
+		usleep(4);
 		accelerate(elements, time_interval);
 		export_plot(elements, 1.5E21);
-
+		double ctime2 = omp_get_wtime();
+		std::cout << "Time: " << ctime2 - ctime1 << " s" << "\n";
 
 	}
 	if(video){make_video(true);}; 
@@ -41,18 +43,20 @@ void scenario_andromeda(bool video)
 
 void scenario_milkyway(bool video)
 {
+	std::cout << std::endl;
 	std::vector<Star> elements;
 	gFile g("examples/scenarios/Milkyway.galaxia", false);
 	elements = g.load();
 	const double time_interval = 6E13; 
 	for(unsigned int i = 1; i<=1000;i++)
 	{
-
+		double ctime1 = omp_get_wtime();
 		std::cout << "Simulation step " << i << "\t";
-		usleep(2);
+		usleep(4);
 		accelerate(elements, time_interval);
 		export_plot(elements, 7.5E20);
-
+		double ctime2 = omp_get_wtime();
+		std::cout << "Time: " << ctime2 - ctime1 << " s" << "\n";
 
 	}
 	if(video){make_video(true);}; 
@@ -65,18 +69,20 @@ void scenario_milkyway(bool video)
 
 void scenario_square(bool video)
 {
+	std::cout << std::endl;
 	std::vector<Star> elements;
 	gFile g("examples/scenarios/Square.galaxia", false);
 	elements = g.load();
 	const double time_interval = 1.2E13;
 	for(unsigned int i = 1; i<=1000;i++)
 	{
-
+		double ctime1 = omp_get_wtime();
 		std::cout << "Simulation step " << i << "\t";
-		usleep(2);
+		usleep(4);
 		accelerate(elements, time_interval);
 		export_plot(elements, 9.5E20);
-
+		double ctime2 = omp_get_wtime();
+		std::cout << "Time: " << ctime2 - ctime1 << " s" << "\n";
 
 	}
 	if(video){make_video(true);}; 
