@@ -1,21 +1,22 @@
 # Galaxia
 A simply galatic simulation tool
 
-Installation
-===========
-This has only been tested on linux machines. While the program should likely also work under MacOS and Windows, please don't get mad at us if it doesn't. But you will have to change the method of video encoding and Gnuplot has to be globally available.
-First, open a terminal, *cd* to the Galaxia dir and use *cmake CMakeList.txt* to generate the makefile. Then use *make* to compile Galaxia.
-Additionaly, *doxygen Doxyfile* will provide excellent HTML and LaTeX documentation.
+##Installation
+###Compatibility
+This program has only been tested on Linux machines. We cannot guarantee flawless execution with Windows, although you should be able to make it work.
 
-Prerequisites
-=============
-Your system has to have a working installation of gnuplot. If you don't have Gnuplot installed yet, go to http://www.gnuplot.info/ and get it, it's free. A working distribution of boost has to be placed in Galaxia/boost .
-You will also need cmake and make in order to compile the code and Doxygen for compiling the documentation (optional). Additionally, ffmpeg is required for video output.
+###Prerequisites
+You will need at least gnuplot, ffmpeg for usage. g++ and cmake are required for compiling. Boost is required for compiling the code and Doxygen is used for documentation. If you are using a Debian based System like Ubuntu, you can install most of these by typing `sudo apt-get install gnuplot ffmpeg doxygen g++ cmake`. After you have done this, go to http://www.boost.org/users/download/ and get the source for the latest version of boost. In the _Galaxia_ folder, create a folder named boost, then unpack the boost source into it. Open a terminal, `cd` to boost and type `./bootstrap.sh`. After this it done it will tell you to execute `./b2`. While root is building its binaries you can go grab a coffee, it takes quite a while.
 
-Authors
-=======
-This tool was written during a programing seminar for physicist at the University of Wuppertal by Maximilian Caspar and Johannes Esser.
+###Compiling the source
+1. `cd` into the _Galaxia_ dir.
+2. Use `cmake .` to build the makefile.
+3. Use `make` for compilation.
+4. You can now run Galaxia with `./bin/Galaxia`
+5. Use `doxygen Doxyfile`. This will generate documentation in _Galaxia/doc_.
 
-Acknowledgements
-================
+##Authors
+This tool was written during a programming seminar for physicist at the University of Wuppertal by _Maximilian Caspar_ and _Johannes Esser_.
+
+##Acknowledgements
 We use Jeremy Conlin's Gnuplot interface for C++. You can find it at https://code.google.com/archive/p/gnuplot-cpp/.

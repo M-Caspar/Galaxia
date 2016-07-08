@@ -55,7 +55,7 @@ void make_menu()
 	cout << "Hello and welcome to Galaxia. Here are your options:" << endl << endl;
 	cout << "  a The Milkyway: Watch our home galaxy in all it\'s beauty." << endl << endl;
 	cout << "  b Andromeda: See our neighbour galaxy smash into us." << endl << endl;
-	//cout << "  c Uniform distribution: Why do stars from from uniform distributions of mass?" << endl << endl;
+	cout << "  c Uniform distribution: Do " << endl << endl;
 	cout << "  x Exit Galaxia" << endl;
 }
 
@@ -72,6 +72,7 @@ int main(int argc, char const *argv[])
 	make_menu();
 	cout << "Please input your choice: ";
 	char choice;
+
 
 	do
 	{
@@ -101,6 +102,19 @@ int main(int argc, char const *argv[])
 			else
 			{
 				scenario_andromeda(false);
+			}
+			break;
+
+			case 'c':
+			cout << "Do you want to create a video (this will delete plot files)? (y/n) ";
+			cin >> choice;
+			if(choice = 'j')
+			{
+				scenario_square(true);
+			}
+			else
+			{
+				scenario_square(false);
 			}
 			break;
 

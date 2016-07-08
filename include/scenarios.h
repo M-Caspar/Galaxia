@@ -39,7 +39,6 @@ void scenario_andromeda(bool video)
 *@param video Decide wether to convert the output plots into a video
 */
 
-
 void scenario_milkyway(bool video)
 {
 	std::vector<Star> elements;
@@ -53,6 +52,31 @@ void scenario_milkyway(bool video)
 		usleep(2);
 		accelerate(elements, time_interval);
 		export_plot(elements, 7.5E20);
+
+
+	}
+	if(video){make_video(true);}; 
+}
+
+/**
+*@brief A rather boring uniform distribution.
+*@param video Decide wether to convert the output plots into a video
+*/
+
+void scenario_square(bool video)
+{
+	std::vector<Star> elements;
+	gFile g("examples/scenarios/Square.galaxia", false);
+	elements = g.load();
+	const double time_interval = 1.2E13;
+	std::cout << elements.size();
+	for(unsigned int i = 1; i<=1000;i++)
+	{
+
+		std::cout << i << "\n";
+		usleep(2);
+		accelerate(elements, time_interval);
+		export_plot(elements, 9.5E20);
 
 
 	}
