@@ -47,7 +47,7 @@ void intro_art()
 }
 
 /**
-*@brief Print a user menu.
+*@brief Print a basic user menu.
 */
 
 void make_menu()
@@ -55,7 +55,7 @@ void make_menu()
 	cout << "Hello and welcome to Galaxia. Here are your options:" << endl << endl;
 	cout << "  a The Milkyway: Watch our home galaxy in all it\'s beauty." << endl << endl;
 	cout << "  b Andromeda: See our neighbour galaxy smash into us." << endl << endl;
-	cout << "  c Uniform distribution: Do " << endl << endl;
+	cout << "  c Uniform distribution: Do uniform distributions turn more chaotic over time?" << endl << endl;
 	cout << "  x Exit Galaxia" << endl;
 }
 
@@ -119,7 +119,6 @@ int main(int argc, char const *argv[])
 			break;
 
 			case 'x':
-			cout << "Live long and prosper!" << endl;
 			break;
 
 			default :
@@ -128,6 +127,8 @@ int main(int argc, char const *argv[])
 			break;
 		}
 	} while(choice == 'u');
+
+	cout << "Live long and prosper!" << endl;
 
 	return 0;
 }
