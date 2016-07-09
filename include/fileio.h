@@ -14,6 +14,7 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/serialization/vector.hpp>
+
 using namespace std;
 using namespace boost::archive;
 
@@ -85,7 +86,7 @@ private:
 	*@brief Checks whether or not a file already exists.
 	*@param in_name Name of the file, relative to main path.
 	*/
-	inline bool exists_test (const std::string& in_name)
+	inline bool exists_test (const string& in_name)
 	{
     	ifstream f(in_name.c_str());
     	return f.good();

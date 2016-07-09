@@ -17,6 +17,9 @@
 
 using std::cout;
 using std::endl;
+using std::string;
+using std::vector;
+using std::cin;
 
 unsigned int nop = 0; //!< The global file counter.
 
@@ -31,9 +34,9 @@ unsigned int number_of_digits (unsigned int i)
     return i > 0 ? (int) log10 ((double) i) + 1 : 1;
 }
 
-std::string filename(unsigned int n)
+string filename(unsigned int n)
 {
-	std::string name = "out/p";
+	string name = "out/p";
 
 	for(unsigned int i = 1; i<= 5; i++)
 	{
@@ -73,7 +76,7 @@ void make_video(bool delete_plotfiles)
 			{
 				for(unsigned int i=1; i<=nop;i++)
 				{
-					std::string name = filename(i) + ".png";
+					string name = filename(i) + ".png";
 					if(remove(name.c_str()) != 0)
 					{
 						throw ("Unspecified file deletion error");
@@ -88,7 +91,7 @@ void make_video(bool delete_plotfiles)
 			throw ("Failed to create output video output");
 		}
 	}
-	catch(std::string er)
+	catch(string er)
 	{
 		cout << er << endl;
 	}
@@ -112,9 +115,9 @@ void wait_for_key ()
 #elif defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__)
     cout << endl << "Press ENTER to continue..." << endl;
 
-    std::cin.clear();
-    std::cin.ignore(std::cin.rdbuf()->in_avail());
-    std::cin.get();
+    cin.clear();
+    cin.ignore(cin.rdbuf()->in_avail());
+    cin.get();
 #endif
     return;
 }
@@ -163,13 +166,13 @@ void init_xy(std::vector<double> & x, std::vector<double> & y, unsigned int n)
 
 void export_plot(const std::vector<Star> & cluster, const double scale)
 {
-	std::vector<double> x,y;
+	vector<double> x,y;
 	init_xy(x,y, cluster.size());
 	export_xy(cluster,x,y);
 
 	nop++;
 
-	std::string name = filename(nop);
+	string name = filename(nop);
 	cout << "File saved: " << name.c_str() << "  ";
 
 

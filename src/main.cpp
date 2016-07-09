@@ -58,7 +58,7 @@ void make_menu()
 	cout << "  a The Milkyway: Watch our home galaxy in all it\'s beauty." << endl << endl;
 	cout << "  b Andromeda: See our neighbour galaxy smash into us." << endl << endl;
 	cout << "  c Uniform distribution: Do uniform distributions turn more chaotic over time?" << endl << endl;
-	cout << "  x Exit Galaxia" << endl;
+	cout << "  x Exit Galaxia" << endl << endl;
 }
 
 /**
@@ -84,7 +84,7 @@ int main(int argc, char const *argv[])
 			case 'a':
 			cout << "Do you want to create a video (this will delete plot files)? (y/n) ";
 			cin >> choice;
-			if(choice = 'j')
+			if(choice == 'y')
 			{
 				scenario_milkyway(true);
 				}
@@ -97,7 +97,7 @@ int main(int argc, char const *argv[])
 			case 'b':
 			cout << "Do you want to create a video (this will delete plot files)? (y/n) ";
 			cin >> choice;
-			if(choice = 'j')
+			if(choice == 'y')
 			{
 				scenario_andromeda(true);
 			}
@@ -110,7 +110,7 @@ int main(int argc, char const *argv[])
 			case 'c':
 			cout << "Do you want to create a video (this will delete plot files)? (y/n) ";
 			cin >> choice;
-			if(choice = 'j')
+			if(choice == 'y')
 			{
 				scenario_square(true);
 			}
