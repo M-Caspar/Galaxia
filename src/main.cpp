@@ -10,12 +10,18 @@
 * We developed this program to calculate the movement of stars in galaxy collisions. 
 * <br>By changing the intial conditions it can be used to tackle about any N-Body problem in classical astrophysics.
 * @section pre_sec Prerequisites
-* Your system has to have a working installation of gnuplot. If you don't have gnuplot installed yet, go to http://www.gnuplot.info/ and get it, it's free.
-* <br> You will also need cmake and make in order to compile the code and Doxygen for compiling the documentation (optional). Additionally, ffmpeg is used for video output.
-* @section inst_sec Installation
-* This has only been tested on linux machines. While the program should likely also work under MacOS and Windows, please don't get mad at us if it doesn't.
-* First, open a terminal, <code>cd</code> to the Galaxia dir and use <code>cmake CMakeList.txt</code> to generate the makefile. Then use <code>make</code> to compile Galaxia.
-* <br> Additionaly, <code>doxygen Doxyfile</code> will provide excellent HTML and LaTeX documentation.
+* You will need at least gnuplot, ffmpeg for usage. g++ and cmake are required for compiling. Boost is required for compiling the code 
+* and Doxygen is used for documentation. If you are using a Debian based System like Ubuntu, you can install most of these by typing 
+* <code>sudo apt-get install gnuplot ffmpeg doxygen g++ cmake</code>. After you have done this, go to http://www.boost.org/users/download/ and get the 
+* source for the latest version of boost. In the Galaxia folder, create a folder named boost, then unpack the boost source into it. Open 
+* a terminal, <code>cd</code> to boost and type <code>./bootstrap.sh</code>. After this it done it will tell you to execute <code>./b2</code>. While root is building its binaries you can go 
+* grab a coffee, it takes quite a while.
+* @section inst_sec Compiling
+* -# <code>cd</code> into the Galaxia dir.
+* -#  Use <code>cmake .</code> to build the makefile.
+* -#  Use <code>make</code> for compilation.
+* -#  You can now run Galaxia with <code>./bin/Galaxia</code>
+* -#  Use <code>doxygen Doxyfile</code>. This will generate documentation in Galaxia/doc .
 * @section ack_sec Acknowledgements
 * We use Jeremy Conlin's Gnuplot interface for C++. You can find it at https://code.google.com/archive/p/gnuplot-cpp/.
 * 
