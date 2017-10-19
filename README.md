@@ -6,7 +6,7 @@ _A simply galatic simulation tool_
 This program has only been tested on Linux machines. We cannot guarantee flawless execution with Windows, although you should be able to make it work.
 
 ### Prerequisites
-You will need at least gnuplot, ffmpeg for usage. g++ and cmake are required for compiling. Boost is required for compiling the code and Doxygen is used for documentation. If you are using a Debian based System like Ubuntu, you can install most of these by typing `sudo apt-get install gnuplot ffmpeg doxygen g++ cmake`. After you have done this, go to http://www.boost.org/users/download/ and get the source for the latest version of boost. In the _Galaxia_ folder, create a folder named _boost_, then unpack the boost source into it. Open a terminal, `cd` to boost and type `./bootstrap.sh`. After this it done it will tell you to execute `./b2`. While root is building its binaries you can go grab a coffee, it takes quite a while.
+You will need at least gnuplot, ffmpeg for usage. g++ and cmake are required for compiling. Boost is required for compiling the code and Doxygen is used for documentation. If you are using a Debian based System like Ubuntu, you can install most of these by typing `sudo apt-get install gnuplot ffmpeg doxygen g++ cmake`. After you have done this, go to http://www.boost.org/users/download/ and get the source for the latest version of boost. In the _Galaxia_ folder, create a folder named _boost_, then unpack the boost source into it. Open a terminal, `cd` to boost and type `./bootstrap.sh`. After this it done it will tell you to execute `./b2`. While boost is building its binaries you can go grab a coffee, it takes quite a while.
 
 
 ### Compiling the source
